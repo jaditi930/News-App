@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
     <nav>
         <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="tech">Tech</a></li>
-            <li><a href="business">Business</a></li>
-            <li><a href="sports">Sports</a></li>
-            <li><a href="ent">Entertainment</a></li>
+            <li onclick="getNews(0)">News Point <i class="fa-regular fa-newspaper"></i></li>
+            <li onclick="getNews(1)">Business <i class="fa-solid fa-briefcase"></i></li>
+            <li onclick="getNews(2)">Technnology <i class="fa-solid fa-microchip"></i></li>
+            <li onclick="getNews(5)">Sports <i class="fa-solid fa-baseball-bat-ball"></i></li>
+            <li onclick="getNews(4)">Science <i class="fa-solid fa-flask"></i></li>
+            <li onclick="getNews(3)">Health <i class="fa-solid fa-virus-covid"></i></li>
+            <li onclick="getNews(6)">Entertainment <i class="fa-solid fa-face-laugh-wink"></i></li>
+            <li onclick="getNews()" id="search"><input type="text" placeholder="Search News"> <i class="fa-solid fa-magnifying-glass"></i></li>
         </ul>
     </nav>
 </head>
