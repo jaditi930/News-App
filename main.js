@@ -19,6 +19,15 @@ function setNews(news_articles){
 }
 window.onload=getNews();
 function getNews(type=0){
+  let news_container=document.getElementById("news")
+  news_container.innerHTML=`
+  <div class="loading-wave">
+  <div class="loading-bar"></div>
+  <div class="loading-bar"></div>
+  <div class="loading-bar"></div>
+  <div class="loading-bar"></div>
+</div>
+  `
   let query=document.getElementsByTagName("input")[0].value;
   category_types=['general','business','technology','health','science','sports','entertainment']
   category=category_types[type]
