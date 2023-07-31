@@ -16,7 +16,9 @@
             <li onclick="getNews(4)">Science <i class="fa-solid fa-flask"></i></li>
             <li onclick="getNews(3)">Health <i class="fa-solid fa-virus-covid"></i></li>
             <li onclick="getNews(6)">Entertainment <i class="fa-solid fa-face-laugh-wink"></i></li>
-            <li onclick="getNews()" id="search"><input type="text" placeholder="Search News"> <i class="fa-solid fa-magnifying-glass"></i></li>
+            <li id="search"><input type="text" placeholder="Search News">
+                 <i id="query" class="fa-solid fa-magnifying-glass" onclick="getNews()"></i>
+            </li>
         </ul>
     </nav>
 </head>

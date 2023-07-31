@@ -18,7 +18,8 @@ function setNews(news_articles){
     }
 }
 window.onload=getNews();
-function getNews(type=0,query=""){
+function getNews(type=0){
+  let query=document.getElementsByTagName("input")[0].value;
   category_types=['general','business','technology','health','science','sports','entertainment']
   category=category_types[type]
     if(query=="")
@@ -34,6 +35,20 @@ function getNews(type=0,query=""){
       return;  
     }
   })
+else{
+  console.log(query)
+  fetch(`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}`)
+  .then((response) => response.json())
+    .then((data) =>  {
+      console.log(data);
+      setNews(data.articles)
 
+    if(data.status!='ok')
+    {
+      news_container.innerHTML+="Could fetch News. Please try again later."
+      return;  
+    }
+})
     
+}
 }
