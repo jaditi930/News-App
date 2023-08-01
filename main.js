@@ -1,20 +1,21 @@
 const API_KEY="3392dd216f9e4ec2ab74b42540932d56";
 var current_news=[]
 function removeModal(){
-  document.getElementById("news_modal").style.display="none";
+  document.getElementsByClassName("news_modal")[0].classList.remove("open_modal");
 }
 function getNewsDetail(event){
+  let news_modal=document.getElementsByClassName("news_modal")[0]
+  news_modal.classList.add("open_modal")
   let id=event.currentTarget.id;
   let news=current_news[id];
   console.log(news.description);
-  document.getElementById("news_modal").innerHTML=`
-  <div><i class="fa-solid fa-xmark" id="modal_cross" onclick="removeModal()"></i></div>
+  news_modal.innerHTML=`
+  <div id="modal_top"><i class="fa-solid fa-xmark fa-xl" id="modal_cross" onclick="removeModal()"></i></div>
   <div id="modal_title">${news.title}</div>
   <img id="modal_image" src=${news.urlToImage}>
   <div id="modal_description">${news.description}</div>
-  <div >Source: <u id="modal_link"><a href="${news.url}">${news.url}</a></u></div>
+  <div id="modal_source">Source: <u id="modal_link"><a href="${news.url}">${news.url}</a></u></div>
   `
-  document.getElementById("news_modal").style.display="block";
 }
 function setNews(news_articles){
   current_news=news_articles;
@@ -25,14 +26,16 @@ function setNews(news_articles){
         let news=news_articles[i];
         news.description=(news.description==null)?" ":news.description;
         console.log(typeof news.description)
-        news_container.innerHTML+=`<div class="news_box">
+        news_container.innerHTML+=`<div
+        <div class="news_box">
         <div ><img class="news_image" src=${news.urlToImage} alt=""></div>
         <div class="body">
         <div class="title">${news.title}</div>
         <div class="read_more" id="${i}">Read More ...</div>
         <div class="date">${news.publishedAt.split('T')[0]}</div>
         </div>
-        </div>` 
+        </div>
+        ` 
         document.querySelectorAll(".read_more")
     .forEach((e) => e.addEventListener("click", getNewsDetail));
     }

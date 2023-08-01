@@ -11,9 +11,10 @@ ul{
 #modal_cross{
   color:black;
   cursor: pointer;
+  margin-left: auto;
 }
-#news_modal{
-  color: black;
+#modal_source{
+  font-size: 20px;
 }
 li{
     margin: 0px 25px;
@@ -31,12 +32,30 @@ li{
 li:hover{
     cursor: pointer;
 }
-#news_modal{
-  display: none;
-  z-index: 2;
+.news_modal{
   text-align: center;
   padding:10px 50px;
+  position: absolute;
+  top: 10%;
+  left:50%;
+  transform: translate(-50%,-50%) scale(0.1);
+  color: black;
+  visibility: hidden;
+  background-color: white;
+  z-index: 2;
 
+}
+.open_modal{
+  position: absolute;
+  top:60%;
+  transform: translate(-50%,-50%) scale(1);
+  visibility: visible;
+  width:80vw;
+  border:2px solid black;
+
+}
+#modal_top{
+  display: flex;
 }
 #modal_image{
   display: block;
@@ -61,6 +80,8 @@ input[type="text"]{
     display: flex;
     flex-wrap:wrap;
     justify-content:center;
+    position: relative;
+    top: 0px;
 }
 .body{
     display: flex;
