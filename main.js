@@ -4,13 +4,14 @@ function removeModal(){
   document.getElementsByClassName("news_modal")[0].classList.remove("open_modal");
 }
 function getNewsDetail(event){
-  let news_modal=document.getElementsByClassName("news_modal")[0]
+  let news_modal=document.getElementsByClassName("news_modal")[0];
   news_modal.classList.add("open_modal")
   let id=event.currentTarget.id;
   let news=current_news[id];
-  console.log(news.description);
   news_modal.innerHTML=`
-  <div id="modal_top"><i class="fa-solid fa-xmark fa-xl" id="modal_cross" onclick="removeModal()"></i></div>
+  <div id="modal_top">
+  <i class="fa-solid fa-xmark fa-xl" id="modal_cross" onclick="removeModal()"></i>
+  </div>
   <div id="modal_title">${news.title}</div>
   <img id="modal_image" src=${news.urlToImage}>
   <div id="modal_description">${news.description}</div>
