@@ -76,6 +76,8 @@ else{
     .then((data) =>  {
       console.log(data);
       setNews(data.articles)
+      document.getElementsByTagName("input")[0].value=""
+
 
     if(data.status!='ok')
     {
