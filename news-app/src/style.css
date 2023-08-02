@@ -63,6 +63,9 @@ li:hover{
 .icons{
     color:white;
 }
+.loader{
+  justify-content: center;
+}
 #search{
     margin-left: auto;
     margin-right: 10%;

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
-import { faBriefcase,faMicrochip,faBaseballBatBall,faFlask,faVirusCovid,faFaceLaughWink, faSearch } from "@fortawesome/free-solid-svg-icons";
 import '../style.css'
 import axios from 'axios'
+import NavBar from "./NavBar";
+import Loader from "./Loader";
 function App() {
   const [currentNews,setNews]=useState([])
+  const [loader,setLoader]=useState("none");
 
     async function getNews(type=0){
+      setNews([])
+      setLoader("flex")
         const API_KEY="3392dd216f9e4ec2ab74b42540932d56"
         let query=document.getElementsByTagName("input")[0].value;
         if (query==""){
@@ -21,6 +23,8 @@ function App() {
           let response=await axios.get(`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}`)
           setNews(response.data.articles)
         }
+        setLoader("none")
+
       };
       useEffect(() => {
         getNews();
@@ -37,20 +41,8 @@ function App() {
       })
   return (
     <>
-    <nav>
-        <ul>
-            <li onClick={()=>{getNews(0)}}>News Point <FontAwesomeIcon icon={faNewspaper}/></li>
-            <li onClick={()=>{getNews(1)}}>Business <FontAwesomeIcon icon={faBriefcase} /></li>
-            <li onClick={()=>{getNews(2)}}>Technnology <FontAwesomeIcon icon={faMicrochip}/></li>
-            <li onClick={()=>{getNews(5)}}>Sports <FontAwesomeIcon icon={faBaseballBatBall}/></li>
-            <li onClick={()=>{getNews(4)}}>Science <FontAwesomeIcon icon={faFlask}/></li>
-            <li onClick={()=>{getNews(3)}}>Health <FontAwesomeIcon icon={faVirusCovid}/></li>
-            <li onClick={()=>{getNews(6)}}>Entertainment <FontAwesomeIcon icon={faFaceLaughWink}/></li>
-            <li id="search"><input type="text" placeholder="Search News"/>
-                 <FontAwesomeIcon id="query" icon={faSearch}  onClick={getNews}/>
-            </li>
-        </ul>
-    </nav>
+    <NavBar getNews={getNews}/>
+    <Loader display={loader}/>
       <div className="news">
         {all_news}
       </div>
