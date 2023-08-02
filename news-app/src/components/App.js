@@ -32,6 +32,7 @@ function App() {
           console.log(query)
           let response=await axios.get(`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}`)
           setNews(response.data.articles)
+          document.getElementsByTagName("input")[0].value=""
         }
         setLoader("none")
 
@@ -57,7 +58,7 @@ function App() {
     <NavBar getNews={getNews}/>
     <Loader display={loader} />
     <Modal news={modalNews} removeModal={removeModal}/>
-      <div className="news">
+      <div id="news">
         {all_news}
       </div>
       </>

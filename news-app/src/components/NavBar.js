@@ -11,8 +11,9 @@ export default function NavBar(props){
     <li onClick={()=>{props.getNews(4)}}>Science <FontAwesomeIcon icon={faFlask}/></li>
     <li onClick={()=>{props.getNews(3)}}>Health <FontAwesomeIcon icon={faVirusCovid}/></li>
     <li onClick={()=>{props.getNews(6)}}>Entertainment <FontAwesomeIcon icon={faFaceLaughWink}/></li>
-    <li id="search"><input type="text" placeholder="Search News"/>
-         <FontAwesomeIcon id="query" icon={faSearch}  onClick={props.getNews}/>
+    <li id="search">
+        <input type="text" placeholder="Search News"/>
+         <FontAwesomeIcon id="query" icon={faSearch}  onClick={props.getNews} value=""/>
     </li>
 </ul>);
 }

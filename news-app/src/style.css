@@ -95,9 +95,10 @@ input[type="text"]{
 *{
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 .news_box{
-    width:296px;
+    width:300px;
     height:350px;
     border: 2px solid black;
     border-radius: 10px;
