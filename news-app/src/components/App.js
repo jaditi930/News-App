@@ -3,10 +3,20 @@ import '../style.css'
 import axios from 'axios'
 import NavBar from "./NavBar";
 import Loader from "./Loader";
+import Modal from "./Modal";
 function App() {
   const [currentNews,setNews]=useState([])
   const [loader,setLoader]=useState("none");
+  const [modalNews,setModalNews]=useState([])
 
+  function showModal(){
+  let news_modal=document.getElementsByClassName("news_modal")[0];
+  news_modal.classList.add("open_modal")
+  }
+
+  function removeModal(){
+    document.getElementsByClassName("news_modal")[0].classList.remove("open_modal");
+  }
     async function getNews(type=0){
       setNews([])
       setLoader("flex")
@@ -34,7 +44,10 @@ function App() {
         <div ><img className="news_image" src={news.urlToImage} alt=""/></div>
         <div className="body">
         <div className="title">{news.title}</div>
-        <div className="read_more">Read More ...</div>
+        <div className="read_more" onClick={()=>{
+          setModalNews(news);
+          showModal();
+          }}>Read More ...</div>
         <div className="date">{news.publishedAt.split('T')[0]}</div>
         </div>
         </div>
@@ -42,7 +55,8 @@ function App() {
   return (
     <>
     <NavBar getNews={getNews}/>
-    <Loader display={loader}/>
+    <Loader display={loader} />
+    <Modal news={modalNews} removeModal={removeModal}/>
       <div className="news">
         {all_news}
       </div>
