@@ -28,15 +28,15 @@ function App() {
     <>
     <nav>
         <ul>
-            <li onClick="getNews(0)">News Point <i className="fa-regular fa-newspaper icons"></i></li>
-            <li onClick="getNews(1)">Business <i className="fa-solid fa-briefcase icons"></i></li>
-            <li onClick="getNews(2)">Technnology <i className="fa-solid fa-microchip icons"></i></li>
-            <li onClick="getNews(5)">Sports <i className="fa-solid fa-baseball-bat-ball icons"></i></li>
-            <li onClick="getNews(4)">Science <i className="fa-solid fa-flask icons"></i></li>
-            <li onClick="getNews(3)">Health <i className="fa-solid fa-virus-covid icons"></i></li>
-            <li onClick="getNews(6)">Entertainment <i className="fa-solid fa-face-laugh-wink icons"></i></li>
+            <li onClick={()=>{getNews(0)}}>News Point <i className="fa-regular fa-newspaper icons"></i></li>
+            <li onClick={()=>{getNews(1)}}>Business <i className="fa-solid fa-briefcase icons"></i></li>
+            <li onClick={()=>{getNews(2)}}>Technnology <i className="fa-solid fa-microchip icons"></i></li>
+            <li onClick={()=>{getNews(5)}}>Sports <i className="fa-solid fa-baseball-bat-ball icons"></i></li>
+            <li onClick={()=>{getNews(4)}}>Science <i className="fa-solid fa-flask icons"></i></li>
+            <li onClick={()=>{getNews(3)}}>Health <i className="fa-solid fa-virus-covid icons"></i></li>
+            <li onClick={()=>{getNews(6)}}>Entertainment <i className="fa-solid fa-face-laugh-wink icons"></i></li>
             <li id="search"><input type="text" placeholder="Search News"/>
-                 <i id="query" className="fa-solid fa-magnifying-glass icons" onClick="getNews()"></i>
+                 <i id="query" className="fa-solid fa-magnifying-glass icons" onClick={getNews}></i>
             </li>
         </ul>
     </nav>
