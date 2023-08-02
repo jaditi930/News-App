@@ -12,8 +12,8 @@ function App() {
   const [modalNews,setModalNews]=useState([])
   const [currentPage,setPage]=useState(1);
   const [currentCategory,setCategory]=useState(0);
-  const [hasMore,setHasMore]=useState(true)
   const [totalLength,setTotalLength]=useState(0)
+
   function showModal(){
   let news_modal=document.getElementsByClassName("news_modal")[0];
   news_modal.classList.add("open_modal")
@@ -22,28 +22,34 @@ function App() {
   function removeModal(){
     document.getElementsByClassName("news_modal")[0].classList.remove("open_modal");
   }
-    async function getNews(type=0){
+    async function getNews(type=0,currentPage=1){
+      if(type!==currentCategory)
+      {
+        setPage(1);
+        setNews([])
+      }
+      console.log(currentPage)
       setLoader("flex")
-        const API_KEY="8fd016c91b214e64a3c1eb03f0bbab03"
+        const API_KEY="c897f5fb6033410aa1144ceb23d6b24e"
         let query=document.getElementsByTagName("input")[0].value;
         if (query===""){
          let category_types=['general','business','technology','health','science','sports','entertainment']
         let category=category_types[type]
         let response=await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&language=en&apiKey=${API_KEY}&page=${currentPage}`)
-        if(type===category)
-        setNews([...currentNews,...response.data.articles])
+        if(type===currentCategory)
+        {
+          setNews([...currentNews,...response.data.articles])
+        console.log(response.data.articles)
+        }
         else{
           setNews([...response.data.articles])
           setCategory(type);
+          setTotalLength(response.data.totalResults)
 
         }
         // console.log(response.data.totalResults)
         // console.log(response.data.articles.length)
-        if(currentPage===1)
-        {
-          setTotalLength(response.data.totalResults)
-        }
-
+        // console.log(currentNews.length)
         }
         else{
           console.log(query)
@@ -55,31 +61,16 @@ function App() {
             setTotalLength(response.data.totalResults)
           }
         }
-        setPage(currentPage+1);
         setLoader("none");
-        console.log(currentNews.length)
-        console.log(totalLength)
-        if (currentNews.length===totalLength)
-        {
-          setHasMore(false);
-        }
       };
       function fetchMoreNews(category){
-        if(category!==currentCategory)
-        {
-          setNews([])
-          setPage(1);
-        }
-        else{
         setPage(currentPage+1);
-        }
-        getNews(category);
+        console.log(currentPage)
+        getNews(category,currentPage+1);
       }
       useEffect(() => {
         getNews();
       }, []);
-      // let all_news=
-      console.log(currentNews)
   return (
     <>
     <NavBar getNews={getNews}/>
@@ -87,14 +78,15 @@ function App() {
     <Modal news={modalNews} removeModal={removeModal}/>
       <div id="news">
       <InfiniteScroll
+          style={{minWidth:"100vw",textAlign:"center"}}
           dataLength={currentNews.length}
           next={()=>fetchMoreNews(currentCategory)}
-          hasMore={hasMore}
+          hasMore={currentNews.length!==totalLength}
           loader={<Loader display={loader} />}
           
         >
       { currentNews.map((news,index)=>{
-        return <div className="news_box" key={index}>
+        return <div className="news_box" key={index} style={{display:"inline-block"}}>
         <div ><img className="news_image" src={news.urlToImage} alt=""/></div>
         <div className="body">
         <div className="title">{news.title}</div>
