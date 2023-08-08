@@ -30,12 +30,15 @@ function App() {
       }
       console.log(currentPage)
       setLoader("flex")
-        const API_KEY="c897f5fb6033410aa1144ceb23d6b24e"
+        const API_KEY="2c519025f30f4bcfb751d542b79d9ebf"
         let query=document.getElementsByTagName("input")[0].value;
         if (query===""){
          let category_types=['general','business','technology','health','science','sports','entertainment']
         let category=category_types[type]
-        let response=await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&language=en&apiKey=${API_KEY}&page=${currentPage}`)
+        let response=await axios.post("https://apiinvoker.pythonanywhere.com/api/",{
+          "api":`https://newsapi.org/v2/top-headlines?country=in&category=${category}&language=en&apiKey=${API_KEY}&page=${currentPage}`
+        })
+        console.log(response)
         if(type===currentCategory)
         {
           setNews([...currentNews,...response.data.articles])
@@ -53,7 +56,9 @@ function App() {
         }
         else{
           console.log(query)
-          let response=await axios.get(`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}&page=${currentPage}`)
+          let response=await axios.post("https://apiinvoker.pythonanywhere.com/api/",{
+            'api':`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}&page=${currentPage}`
+          })
           setNews(response.data.articles)
           document.getElementsByTagName("input")[0].value=""
           if(currentPage===1)
@@ -71,6 +76,7 @@ function App() {
       useEffect(() => {
         getNews();
       }, []);
+      console.log(currentNews)
   return (
     <>
     <NavBar getNews={getNews}/>
